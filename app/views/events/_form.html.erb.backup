@@ -1,0 +1,71 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br>
+    <%= f.collection_select :location_id, @locations, :id, :name %>
+  </div>
+  <div id="new_location" style="display: none">
+    <%= #f.fields_for :location do |location_form| %>
+    <%= f.fields_for @new_location do |location_form| %>
+      <div class="field">
+        <%= location_form.label :name %><br>
+        <%= location_form.text_field :name %>
+      </div>
+      <div class="field">
+        <%= location_form.label :address %><br>
+        <%= location_form.text_field :address %>
+      </div>
+      <div class="field">
+        <%= location_form.label :phone %><br>
+        <%= location_form.text_field :phone %>
+      </div>
+      <div class="field">
+        <%= location_form.label :url %><br>
+        <%= location_form.text_field :url %>
+      </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function(){
+    $('#event_location_id').append("<option value='0'>Create new...</option>");
+  });
+
+  $('#event_location_id').change(function() {
+    if( $('#event_location_id').val() === '0' ) {
+      document.getElementById('new_location').style.display = 'block';
+    }else {
+      document.getElementById('new_location').style.display = 'none';
+    }
+  });
+</script>

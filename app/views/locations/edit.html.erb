@@ -1,0 +1,7 @@
+<h1>Editing location</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @location, class: 'btn btn-info btn-md' %>
+<%= link_to 'Remove', @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-md' %>
+<%= link_to 'Back', locations_path, class: 'btn btn-primary btn-md' %>

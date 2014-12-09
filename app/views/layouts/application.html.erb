@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EventManager</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="container">
+
+<header class="row">
+  <div class="span12">
+    <h1>Event Manager</h1>
+  </div>
+</header>
+
+<nav class="navbar">
+  <div class="collapse navbar-collapse">
+    <ul class="nav nav-pills">
+      <li <% if params[:controller] == 'front' %>class="active"<% end %>><%= link_to 'Frontpage', front_index_path %></li>
+      <li <% if params[:controller] == 'events' %>class="active"<% end %>><%= link_to 'Events', events_path %></li>
+      <li <% if params[:controller] == 'locations' %>class="active"<% end %>><%= link_to 'Locations', locations_path %></li>
+    </ul>
+  </div>  
+</nav>
+
+<main>
+  <div id="main-content" class="content">
+    <div class="row">
+      <div class="col-md-9">
+        <% if notice %>
+          <p class="alert"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+
+        <%= yield %>
+      </div>
+
+      <div class="col-md-3">
+        
+        <%= render "devise/shared/sign_in" %>
+        
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

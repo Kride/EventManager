@@ -1,0 +1,7 @@
+<h1>Editing event</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @event, class: 'btn btn-info btn-md' %>
+<%= link_to 'Remove', @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-md' %>
+<%= link_to 'Back', events_path, class: 'btn btn-primary btn-md' %>

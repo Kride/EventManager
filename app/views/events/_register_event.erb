@@ -1,0 +1,26 @@
+<% registration = users_registration(event) %>
+<% if registration.nil? %>
+  <% registration = Registration.new %>
+  <%= link_to registrations_path(registration: { user_id: current_user, event_id: event, status: 'yes' } ), method: :post do %>
+    <i class="glyphicon glyphicon-ok-circle"></i>
+  <% end %>
+  <%= link_to registrations_path(registration: { user_id: current_user, event_id: event, status: 'maybe' } ), method: :post do %>
+    <i class="glyphicon glyphicon-time" ></i>
+  <% end %>
+  <%= link_to registrations_path(registration: { user_id: current_user, event_id: event, status: 'no' } ), method: :post do %>
+    <i class="glyphicon glyphicon-remove-circle"></i>
+  <% end %>
+<% else %>
+  <%= link_to registration_path(registration, params: { registration: { status: 'yes' } } ), method: :patch do %>
+    <i class="glyphicon glyphicon-ok-circle" <% if registration.status == 'yes' %>style="color: #5cb85c"<% end %>></i>
+  <% end %>
+  <%= link_to registration_path(registration, params: { registration: { status: 'maybe' } } ), method: :patch do %>
+    <i class="glyphicon glyphicon-time" <% if registration.status == 'maybe' %>style="color: #e6e65c"<% end %>></i>
+  <% end %>
+  <%= link_to registration_path(registration, params: { registration: { status: 'no' } } ), method: :patch do %>
+    <i class="glyphicon glyphicon-remove-circle" <% if registration.status == 'no' %>style="color: #d9534f"<% end %>></i>
+  <% end %>
+  <%= link_to registration_path(registration), method: :delete do %>
+    <i class="glyphicon glyphicon-ban-circle"></i>
+  <% end %>
+<% end %>
