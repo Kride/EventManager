@@ -28,4 +28,6 @@
 
 <br>
 
+<% if user_signed_in? %>
 <%= link_to 'New Event', new_event_path, class: 'btn btn-success btn-md' %>
+<% end %>

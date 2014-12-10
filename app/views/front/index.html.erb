@@ -1,2 +1,26 @@
-<h1>Front#index</h1>
-<p>Find me in app/views/front/index.html.erb</p>
+<h2>Upcoming events</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start time</th>
+      <th>Location</th>
+      <% if user_signed_in? %>
+      <th>Register to event</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @upcoming_events.each do |event| %>
+      <tr>
+        <td><%= link_to event.name, event %></td>
+        <td><%= event.start_time %></td>
+        <td><%= @locations.find_by_id(event.location).name %></td>
+        <% if user_signed_in? %>
+        <td><%= render 'events/register_event', event: event %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -3,14 +3,16 @@
 <head>
   <title>EventManager</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag '//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry' %>
+  <%= javascript_include_tag '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body class="container">
 
-<header class="row">
+<header class="row page-header">
   <div class="span12">
-    <h1>Event Manager</h1>
+    <h1 class="header-title">Event Manager</h1>
   </div>
 </header>
 
@@ -27,7 +29,7 @@
 <main>
   <div id="main-content" class="content">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-8">
         <% if notice %>
           <p class="alert"><%= notice %></p>
         <% end %>
@@ -38,7 +40,7 @@
         <%= yield %>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
         
         <%= render "devise/shared/sign_in" %>
         

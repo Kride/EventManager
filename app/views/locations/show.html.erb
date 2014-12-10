@@ -18,8 +18,64 @@
   <%= @location.url %>
 </p>
 
+<div id="map" style='width: 600px; height: 300px;'></div>
+
 <% if user_signed_in? %>
   <%= link_to 'Edit', edit_location_path(@location), class: 'btn btn-info btn-md' %>
   <%= link_to 'Remove', @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-md' %>
 <% end %>
 <%= link_to 'Back', locations_path, class: 'btn btn-primary btn-md' %>
+
+<% if @location.events.count > 0 %>
+<h2>Events</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start time</th>
+      <% if user_signed_in? %>
+      <th>Register to event</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @location.events.each do |event| %>
+      <tr>
+        <td><%= link_to event.name, event %></td>
+        <td><%= event.start_time %></td>
+        <% if user_signed_in? %>
+        <td><%= render 'events/register_event', event: event %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<script>
+
+function initialize() {
+
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode( { 'address': "<%= @location.address %>"}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+
+      var mapOptions = {
+        zoom: 12,
+        center: results[0].geometry.location
+      }
+      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      
+      var marker = new google.maps.Marker({
+        position: results[0].geometry.location,
+        map: map,
+        title: '<%= @location.name %>'
+      });
+    } else {
+      document.getElementById('map').style.display = 'none';
+    }
+  });
+}
+
+</script>

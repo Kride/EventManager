@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @location = Location.find_by_id(@event.location).name
+    @location = Location.find_by_id(@event.location)
     @registered_users = @event.users
     respond_with(@event)
   end
