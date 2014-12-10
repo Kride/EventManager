@@ -1,28 +1,26 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
+  2.1.5p273
 
 * System dependencies
+  MySQL server + MySQL client devel libraries
 
 * Configuration
+  Copy config/database.yml.template to config/database.yml
+  Change DB-user password (and other values if you don't want to use default settings)
 
 * Database creation
+  CREATE DATABASE evman_dev;
+  CREATE USER 'evman'@'localhost' IDENTIFIED BY '<password>';
+  GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,LOCK TABLES ON evman_dev.* TO 'evman'@'localhost';
+  
+  Same steps for adding test and production databases.
 
 * Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+  rake db:create # create databases
+  rake db:migrate # run migrations
+  rake db:seed # create some initial recors (optional)
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

@@ -36,6 +36,12 @@
 <%= link_to 'Back', events_path, class: 'btn btn-primary btn-md' %>
 
 <% if user_signed_in? %>
+<br><br>
+<p>
+  <strong>Are you going to attend this event?</strong>
+  <%= render "register_event", event: @event %>
+</p>
+
 <h2>Registered users</h2>
 <table class="table table-hover">
   <thead>
